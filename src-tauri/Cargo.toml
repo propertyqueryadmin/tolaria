@@ -41,4 +41,12 @@ uuid = { version = "1", features = ["v4"] }
 tempfile = "3"
 reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
 
+# Android cross-compile needs OpenSSL statically vendored. Without this,
+# `openssl-sys` (pulled transitively by tauri-plugin-updater / sentry / etc.)
+# cannot find a system OpenSSL when building for aarch64-linux-android. Scoped
+# to target_os = "android" so the desktop build is untouched. This also covers
+# the future libgit2-sys dependency added in Phase 3 (on-device git).
+[target.'cfg(target_os = "android")'.dependencies]
+openssl = { version = "0.10", features = ["vendored"] }
+
 [dev-dependencies]

@@ -290,7 +290,9 @@ fn setup_desktop_plugins(app: &mut tauri::App) -> Result<(), Box<dyn std::error:
     Ok(())
 }
 
-#[cfg(debug_assertions)]
+// WebviewWindow::{unminimize, show, center, set_focus} only exist on desktop,
+// so gate the debug-only fast-show on desktop too.
+#[cfg(all(debug_assertions, desktop))]
 fn show_debug_main_window(app: &mut tauri::App) {
     use tauri::Manager;
 
@@ -302,7 +304,7 @@ fn show_debug_main_window(app: &mut tauri::App) {
     }
 }
 
-#[cfg(not(debug_assertions))]
+#[cfg(not(all(debug_assertions, desktop)))]
 fn show_debug_main_window(_app: &mut tauri::App) {}
 
 #[cfg(all(desktop, target_os = "linux"))]

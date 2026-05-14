@@ -81,6 +81,8 @@ pub async fn reload_vault(
     path: String,
 ) -> Result<Vec<crate::vault::VaultEntry>, String> {
     let path = expand_tilde(&path).into_owned();
+    // Asset scope tracking is desktop-only (no asset-protocol scope on mobile).
+    #[cfg(desktop)]
     crate::sync_vault_asset_scope(&app_handle, Path::new(&path))?;
     tokio::task::spawn_blocking(move || {
         let vault_path = Path::new(&path);

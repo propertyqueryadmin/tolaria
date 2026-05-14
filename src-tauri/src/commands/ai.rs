@@ -1,4 +1,4 @@
-#[cfg(desktop)]
+// Used by both desktop and mobile (mobile stubs reference these types).
 use crate::ai_agents::{AiAgentStreamRequest, AiAgentsStatus};
 #[cfg(desktop)]
 use crate::ai_models::{AiModelProviderTestRequest, AiModelStreamRequest};

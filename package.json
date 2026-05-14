@@ -111,6 +111,11 @@
     "ws": "^8.19.0"
   },
   "pnpm": {
+    "onlyBuiltDependencies": [
+      "core-js",
+      "esbuild",
+      "protobufjs"
+    ],
     "overrides": {
       "@hono/node-server": "1.19.13",
       "express-rate-limit": "8.2.2",

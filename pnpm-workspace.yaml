@@ -1,8 +1,10 @@
 packages:
   - mcp-server
 
-ignoredBuiltDependencies:
-  - esbuild
+allowBuilds:
+  core-js: true
+  esbuild: true
+  protobufjs: true
 
 patchedDependencies:
   '@blocknote/core@0.46.2': patches/@blocknote__core@0.46.2.patch
